@@ -12,7 +12,7 @@ echo
 echo "Waiting for DaemonSet..."
 echo
 
-kubectl rollout status daemonset/calico-node -n calico-system --timeout=300s
+kubectl rollout status daemonset/calico-node -n kube-system --timeout=300s
 
 echo
 echo "Calico installed."

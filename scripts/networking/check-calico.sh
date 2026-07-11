@@ -28,7 +28,7 @@ log_header "System Pods"
 kubectl get pods -A
 
 log_header "Calico Pods"
-kubectl get pods -n calico-system
+kubectl get pods -n kube-system | grep calico
 
 log_header "CoreDNS"
 kubectl get pods -n kube-system -l k8s-app=kube-dns
