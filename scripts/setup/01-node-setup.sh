@@ -350,19 +350,7 @@ install_tools() {
                 tmux
             ;;
     esac
-    
-    # Install kubectl bash completion
-    # if [ -n "$SUDO_USER" ]; then
-    #     USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-    #     sudo -u "$SUDO_USER" bash -c 'echo "source <(kubectl completion bash)" >> ~/.bashrc'
-    #     sudo -u "$SUDO_USER" bash -c 'echo "alias k=kubectl" >> ~/.bashrc'
-    #     sudo -u "$SUDO_USER" bash -c 'echo "complete -o default -F __start_kubectl k" >> ~/.bashrc'
-    # else
-    #     echo "source <(kubectl completion bash)" >> ~/.bashrc
-    #     echo "alias k=kubectl" >> ~/.bashrc
-    #     echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
-    # fi
-    
+
     log_info "Common tools installed"
 }
 
