@@ -1,5 +1,59 @@
 # AJ's Kubernetes Home Lab 
 
+## Folder Structure
+
+```text
+k8s-lab/
+├── README.md
+│
+├── docs/
+│   ├── architecture.md
+│   ├── network.md
+│   ├── certificates.md
+│   ├── disaster-recovery.md
+│   └── inventory.md
+│
+├── scripts/
+│   ├── setup/
+│   ├── management/
+│   ├── backup/
+│   ├── restore/
+│   ├── monitoring/
+│   └── utils/
+│
+├── manifests/
+│   ├── namespaces/
+│   ├── ingress/
+│   ├── storage/
+│   ├── security/
+│   ├── monitoring/
+│   └── apps/
+│
+├── helm/
+│   ├── prometheus/
+│   ├── grafana/
+│   ├── metallb/
+│   ├── ingress-nginx/
+│   ├── cert-manager/
+│   └── external-secrets/
+│
+├── configs/
+│   ├── kubeadm/
+│   ├── containerd/
+│   ├── cni/
+│   └── metallb/
+│
+├── backups/
+│
+├── inventory/
+│   ├── hosts.ini
+│   └── group_vars/
+│
+└── ansible/
+    ├── playbooks/
+    └── roles/
+```
+
 ## Quick Start on Your Laptop
 
 ```bash
@@ -7,6 +61,11 @@
 cd ~
 mkdir -p k8s-lab
 cd k8s-lab
+
+# On luke
+git clone https://github.com/uidz3r0/k8s-lab.git /k8s-lab
+cd /k8s-lab/ && git pull -v
+scripts/setup/verify-install-pretty.sh
 
 # Initialize with my structure
 curl -s https://gist.github.com/your-gist-url/setup-lab.sh | bash

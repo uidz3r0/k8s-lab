@@ -21,11 +21,17 @@ ARROW="➜"
 log_header() { echo -e "\n${BOLD}${CYAN}═══════ $1 ═══════${NC}"; }
 log_subheader() { echo -e "\n${MAGENTA}${ARROW}${NC} ${BOLD}$1${NC}"; }
 
-log_header "Nodes"
-kubectl get nodes -o wide
+log_header "Cluster Nodes"
+kubectl get nodes
 
 log_header "System Pods"
 kubectl get pods -A
+
+log_header "Calico Pods"
+kubectl get pods -n calico-system
+
+log_header "CoreDNS"
+kubectl get pods -n kube-system -l k8s-app=kube-dns
 
 log_header "Cluster Info"
 kubectl cluster-info
