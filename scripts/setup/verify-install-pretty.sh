@@ -220,7 +220,7 @@ check_kubernetes() {
     # Check kubectl
     log_subheader "Kubectl"
     if command -v kubectl >/dev/null 2>&1; then
-        local version=$(kubectl version --client -o short 2>/dev/null || echo "unknown")
+        local version=$(kubectl version | head -n 1 2>/dev/null || echo "unknown")
         log_pass "Kubectl: $version"
     else
         log_fail "Kubectl is NOT installed"
