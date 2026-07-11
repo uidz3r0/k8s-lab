@@ -1,0 +1,6 @@
+*.swp
+*.tmp
+*.log
+.env
+kubeconfig
+secrets/
