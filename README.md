@@ -54,9 +54,11 @@ ssh user@10.1.1.10  # Should connect
 # Check SELinux on Rocky
 getenforce  # Should show "Permissive"
 
+
 # Check time sync on any node
 timedatectl status
 chronyc sources -v
+
 
 # ✅ DO: Use sudo for individual commands
 sudo apt-get install kubeadm
