@@ -1,0 +1,1 @@
+/home/allan/k8s/week7-cluster-operations/W7D1/scripts/common/verify-install.sh

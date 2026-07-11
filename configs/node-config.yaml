@@ -1,0 +1,19 @@
+# ~/k8s-lab/configs/node-config.yaml
+nodes:
+  luke:
+    ip: 10.1.1.10
+    os: rocky
+    role: control-plane
+    kubernetes_version: 1.34
+    
+  han:
+    ip: 10.1.1.11
+    os: ubuntu
+    role: control-plane
+    kubernetes_version: 1.34
+    
+  leia:
+    ip: 10.1.1.12
+    os: ubuntu
+    role: worker
+    kubernetes_version: 1.34
