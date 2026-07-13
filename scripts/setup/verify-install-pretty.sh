@@ -101,7 +101,7 @@ check_system() {
     if command -v chronyc >/dev/null 2>&1; then
         if chronyc tracking >/dev/null 2>&1; then
             log_pass "Chrony is running"
-            chronyc sources -v 2>/dev/null | grep -E "^\^" | head -3 | while read line; do
+            chronyc sources -v 2>/dev/null | grep -E "^\^" | sed -n '1,3p' | while read line; do
                 log_detail "$line"
             done
         else
@@ -174,7 +174,7 @@ check_containerd() {
     # Check containerd installation
     log_subheader "Containerd Installation"
     if command -v containerd >/dev/null 2>&1; then
-        local version=$(containerd --version 2>/dev/null | head -1)
+        local version=$(containerd --version 2>/dev/null | sed -n '1p')
         log_pass "Containerd is installed: $version"
     else
         log_fail "Containerd is NOT installed"
@@ -185,12 +185,12 @@ check_containerd() {
     log_subheader "Containerd Service"
     if systemctl is-active --quiet containerd; then
         log_pass "Containerd service is running"
-        systemctl status containerd --no-pager | head -3 | while read line; do
+        systemctl status containerd --no-pager | sed -n '1,3p' | while read line; do
             log_detail "$line"
         done
     else
         log_fail "Containerd service is NOT running"
-        systemctl status containerd --no-pager | head -5
+        systemctl status containerd --no-pager | sed -n '1,5p'
         return 0
     fi
     
@@ -229,7 +229,7 @@ check_kubernetes() {
     # Check kubelet
     log_subheader "Kubelet"
     if command -v kubelet >/dev/null 2>&1; then
-        local version=$(kubelet --version 2>/dev/null | head -1)
+        local version=$(kubelet --version 2>/dev/null | sed -n '1p')
         log_pass "Kubelet: $version"
         
         # Check service status
@@ -260,7 +260,7 @@ check_cri() {
         log_pass "crictl is installed"
         if crictl info >/dev/null 2>&1; then
             log_pass "crictl can connect to CRI"
-            crictl version 2>/dev/null | grep -E "Version" | head -2 | while read line; do
+            crictl version 2>/dev/null | grep -E "Version" | sed -n '1,2p' | while read line; do
                 log_detail "$line"
             done
         else
@@ -273,7 +273,7 @@ check_cri() {
     # Check runc
     log_subheader "OCI Runtime"
     if command -v runc >/dev/null 2>&1; then
-        local version=$(runc --version | head -1)
+        local version=$(runc --version | sed -n '1p')
         log_pass "runc is installed: $version"
     else
         log_warn "runc is not installed"
