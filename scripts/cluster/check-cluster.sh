@@ -21,11 +21,11 @@ ARROW="➜"
 log_header() { echo -e "\n${BOLD}${CYAN}═══════ $1 ═══════${NC}"; }
 log_subheader() { echo -e "\n${MAGENTA}${ARROW}${NC} ${BOLD}$1${NC}"; }
 
-log_header "Nodes"
-kubectl get nodes -o wide
-
-log_header "System Pods"
-kubectl get pods -A
-
 log_header "Cluster Info"
 kubectl cluster-info
+
+echo
+kubectl get nodes -o wide
+
+echo
+kubectl get pods -A

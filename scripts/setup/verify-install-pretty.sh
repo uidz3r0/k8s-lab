@@ -56,7 +56,7 @@ check_root() {
 print_header() {
     echo -e "${BOLD}${CYAN}"
     echo "╔══════════════════════════════════════════════════════════╗"
-    echo "║           KUBERNETES NODE VERIFICATION                  ║"
+    echo "║           KUBERNETES NODE VERIFICATION                   ║"
     echo "╚══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
     
