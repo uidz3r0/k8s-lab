@@ -80,10 +80,20 @@ configure_ssh() {
             run_privileged dnf install -y openssh-server
             ;;
     esac
+
+    local ssh_service
+    case $OS in
+        ubuntu)
+            ssh_service="ssh"
+            ;;
+        rocky|rhel|centos)
+            ssh_service="sshd"
+            ;;
+    esac
     
     # Ensure SSH is enabled and running
-    run_privileged systemctl enable sshd
-    run_privileged systemctl start sshd
+    run_privileged systemctl enable "$ssh_service"
+    run_privileged systemctl start "$ssh_service"
     
     # Secure SSH configuration
     run_privileged sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -91,7 +101,7 @@ configure_ssh() {
     run_privileged sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
     
     # Restart SSH to apply changes
-    run_privileged systemctl restart sshd
+    run_privileged systemctl restart "$ssh_service"
     
     log_info "SSH configured and running"
 }
@@ -106,6 +116,16 @@ configure_chrony() {
             ;;
         rocky|rhel|centos)
             run_privileged dnf install -y chrony
+            ;;
+    esac
+
+    local chrony_service
+    case $OS in
+        ubuntu)
+            chrony_service="chrony"
+            ;;
+        rocky|rhel|centos)
+            chrony_service="chronyd"
             ;;
     esac
     
@@ -141,8 +161,8 @@ rtcsync
 EOF
     
     # Enable and start chrony
-    run_privileged systemctl enable chronyd
-    run_privileged systemctl restart chronyd
+    run_privileged systemctl enable "$chrony_service"
+    run_privileged systemctl restart "$chrony_service"
     
     # Wait a moment for chrony to sync
     sleep 2
