@@ -396,7 +396,7 @@ main() {
     esac
     
     # System configuration steps
-    #configure_ssh
+    configure_ssh
     configure_chrony
     configure_selinux
     disable_swap
