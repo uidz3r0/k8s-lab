@@ -289,6 +289,13 @@ check_firewall() {
         if systemctl is-active --quiet firewalld; then
             log_warn "firewalld is RUNNING (may block Kubernetes traffic)"
             log_detail "Run: sudo systemctl stop firewalld && sudo systemctl disable firewalld"
+            log_info "At minimum, open the Kubernetes ports:"
+            log_detail "  sudo firewall-cmd --permanent --add-port=6443/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=2379-2380/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=10250/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=10251/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=10252/tcp"
+            log_detail "  sudo firewall-cmd --reload"   
         else
             log_pass "firewalld is not running"
         fi
@@ -297,6 +304,12 @@ check_firewall() {
         if systemctl is-active --quiet ufw; then
             log_warn "UFW is RUNNING (may block Kubernetes traffic)"
             log_detail "Run: sudo ufw disable"
+            log_info "At minimum, open the Kubernetes ports:"
+            log_detail "  sudo ufw allow 6443/tcp"
+            log_detail "  sudo ufw allow 2379:2380/tcp"
+            log_detail "  sudo ufw allow 10250/tcp"
+            log_detail "  sudo ufw allow 10251/tcp"
+            log_detail "  sudo ufw allow 10252/tcp"
         else
             log_pass "UFW is not running"
         fi
@@ -305,6 +318,12 @@ check_firewall() {
         if sudo iptables -L -n | grep -q "Chain" 2>/dev/null; then
             log_warn "iptables has rules configured"
             log_detail "Check with: sudo iptables -L -n"
+            log_info "At minimum, open the Kubernetes ports:"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 6443 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 2379:2380 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 10250 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 10251 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 10252 -j ACCEPT"
         else
             log_pass "iptables: no rules blocking traffic"
         fi
