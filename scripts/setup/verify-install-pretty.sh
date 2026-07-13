@@ -293,8 +293,8 @@ check_firewall() {
             log_detail "  sudo firewall-cmd --permanent --add-port=6443/tcp"
             log_detail "  sudo firewall-cmd --permanent --add-port=2379-2380/tcp"
             log_detail "  sudo firewall-cmd --permanent --add-port=10250/tcp"
-            log_detail "  sudo firewall-cmd --permanent --add-port=10251/tcp"
-            log_detail "  sudo firewall-cmd --permanent --add-port=10252/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=10257/tcp"
+            log_detail "  sudo firewall-cmd --permanent --add-port=10259/tcp"
             log_detail "  sudo firewall-cmd --reload"   
         else
             log_pass "firewalld is not running"
@@ -308,8 +308,8 @@ check_firewall() {
             log_detail "  sudo ufw allow 6443/tcp"
             log_detail "  sudo ufw allow 2379:2380/tcp"
             log_detail "  sudo ufw allow 10250/tcp"
-            log_detail "  sudo ufw allow 10251/tcp"
-            log_detail "  sudo ufw allow 10252/tcp"
+            log_detail "  sudo ufw allow 10257/tcp"
+            log_detail "  sudo ufw allow 10259/tcp"
         else
             log_pass "UFW is not running"
         fi
@@ -322,8 +322,8 @@ check_firewall() {
             log_detail "  sudo iptables -A INPUT -p tcp --dport 6443 -j ACCEPT"
             log_detail "  sudo iptables -A INPUT -p tcp --dport 2379:2380 -j ACCEPT"
             log_detail "  sudo iptables -A INPUT -p tcp --dport 10250 -j ACCEPT"
-            log_detail "  sudo iptables -A INPUT -p tcp --dport 10251 -j ACCEPT"
-            log_detail "  sudo iptables -A INPUT -p tcp --dport 10252 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 10257 -j ACCEPT"
+            log_detail "  sudo iptables -A INPUT -p tcp --dport 10259 -j ACCEPT"
         else
             log_pass "iptables: no rules blocking traffic"
         fi
@@ -333,7 +333,7 @@ check_firewall() {
     
     # Check required ports (if cluster is running)
     log_subheader "Required Ports"
-    local ports=(6443 10250 2379)
+    local ports=(6443 10250 2379 10257 10259)
     for port in "${ports[@]}"; do
         if ss -tlnp | grep -q ":$port "; then
             log_pass "Port $port is listening"
