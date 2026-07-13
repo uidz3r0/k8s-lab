@@ -15,7 +15,8 @@ k8s-lab/
 │
 ├── scripts/
 │   ├── setup/
-│   ├── management/
+│   ├── cluster/
+|   ├── worker/
 │   ├── backup/
 │   ├── restore/
 │   ├── monitoring/
@@ -71,7 +72,7 @@ scripts/setup/verify-install-pretty.sh
 curl -s https://gist.github.com/your-gist-url/setup-lab.sh | bash
 
 # Or create manually
-mkdir -p scripts/{setup,management,monitoring,utils}
+mkdir -p scripts/{setup,cluster,worker,monitoring,utils}
 mkdir -p manifests/{ingress,storage,apps}
 mkdir -p configs docs
 
@@ -86,6 +87,16 @@ chmod +x scripts/setup/*.sh
 for node in luke han leia; do
     rsync -avz ~/k8s-lab/ $node@10.1.1.10:~/k8s-lab/ 2>/dev/null || true
 done
+```
+
+---
+
+## Quick Deploy
+
+```bash
+git clone https://github.com/uidz3r0/k8s-lab.git /k8s-lab
+/k8s-lab/scripts/setup/verify-install-pretty.sh
+/k8s-lab/scripts/cluster/check-cluster.sh
 ```
 
 ---

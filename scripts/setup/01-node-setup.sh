@@ -49,7 +49,7 @@ check_prerequisites() {
     # Check if running as root
     if [ "$EUID" -eq 0 ]; then 
         log_error "Please run as a regular user with sudo privileges, not as root"
-        log_error "   Correct: sudo ./node-setup.sh"
+        log_error "   Correct: ./node-setup.sh"
         log_error "   Wrong:   sudo su - && ./node-setup.sh"
         exit 1
     fi
@@ -376,7 +376,7 @@ main() {
     esac
     
     # System configuration steps
-    configure_ssh
+    #configure_ssh
     configure_chrony
     configure_selinux
     disable_swap
