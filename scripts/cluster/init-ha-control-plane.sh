@@ -9,7 +9,13 @@ sudo kubeadm init \
     --upload-certs
 
 echo
-echo "HA Control Plane initialized."
+echo "HA Control Plane initialized successfully."
 echo
-echo "Next:"
-echo "  scripts/cluster/kubeconfig.sh"
+echo "Next steps:"
+echo "  1. Configure kubectl"
+echo "     /k8s-lab/scripts/cluster/kubeconfig.sh"
+echo
+echo "  2. Verify the control plane"
+echo "     kubectl get nodes"
+echo
+echo "  3. Join additional control-plane and worker nodes"
