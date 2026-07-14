@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ETCDCTL=$(command -v etcdctl)
 SNAPSHOT="$1"
 
-sudo ETCDCTL_API=3 etcdctl snapshot restore "${SNAPSHOT}" \
+sudo ETCDCTL_API=3 "$ETCDCTL" snapshot restore "${SNAPSHOT}" \
   --data-dir=/var/lib/etcd-restored
 
 echo
