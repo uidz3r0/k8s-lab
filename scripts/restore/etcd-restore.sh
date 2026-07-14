@@ -3,7 +3,7 @@ set -euo pipefail
 
 SNAPSHOT="$1"
 
-sudo etcdctl snapshot restore "${SNAPSHOT}" \
+sudo etcdutl snapshot restore "${SNAPSHOT}" \
   --data-dir=/var/lib/etcd-restored
 
 echo
