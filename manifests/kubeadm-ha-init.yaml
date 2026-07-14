@@ -1,6 +1,7 @@
 apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 
+clusterName: homelab
 kubernetesVersion: v1.34.9
 
 controlPlaneEndpoint: "k8s-api.lab:6443"
