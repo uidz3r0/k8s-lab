@@ -3,4 +3,4 @@ set -euo pipefail
 
 LATEST=$(ls -t /k8s-lab/backups/*.db | head -1)
 
-sudo etcdctl snapshot status "${LATEST}" --write-out=table
+sudo etcdutl snapshot status "${LATEST}" --write-out=table
