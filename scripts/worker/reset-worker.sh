@@ -10,5 +10,9 @@ sudo rm -rf \
 /var/lib/kubelet \
 /etc/kubernetes
 
+sudo systemctl restart containerd
+sudo systemctl restart kubelet
+
 echo
 echo "Worker reset complete."
+

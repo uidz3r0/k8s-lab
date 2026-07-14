@@ -183,3 +183,67 @@ lsmod | grep -E "overlay|br_netfilter"
 sysctl net.bridge.bridge-nf-call-iptables
 sysctl net.ipv4.ip_forward
 ```
+
+---
+
+On the control plane, /etc/kubernetes contains things like:
+
+```text
+/etc/kubernetes/
+├── admin.conf              # kubectl config
+├── kubelet.conf
+├── controller-manager.conf
+├── scheduler.conf
+├── manifests/
+│   ├── kube-apiserver.yaml
+│   ├── kube-controller-manager.yaml
+│   ├── kube-scheduler.yaml
+│   └── etcd.yaml
+└── pki/
+    ├── ca.crt
+    ├── ca.key
+    ├── apiserver.crt
+    └── ...
+```
+
+The actual cluster database is here
+
+```text
+/var/lib/etcd
+```
+
+## In production, you don't "reset" a control plane
+
+If you need to replace a control plane node, the workflow is more like:
+
+1. Back up etcd.
+2. Ensure etcd quorum is maintained.
+3. Remove the control plane node from the cluster.
+4. Remove its etcd member.
+5. Provision a new machine.
+6. Join the new machine as a control plane.
+
+## If start from scratch, heres a reset cluster: 
+
+```bash
+#!/bin/bash
+
+echo "Resetting Kubernetes Cluster..."
+sudo kubeadm reset -f
+
+sudo rm -rf \
+/etc/cni/net.d \        # CNI configuration
+/var/lib/cni \          # CNI state
+/var/lib/kubelet \      # Kubelet state
+/etc/kubernetes \       # Kubernetes configuration (not in prod)
+/var/lib/etcd \         # etcd database (not in prod)
+~/.kube                 # User kubeconfig
+
+echo "Restarting containerd and kubelet..."
+sudo systemctl restart containerd
+sudo systemctl restart kubelet
+
+echo
+echo "Cluster reset complete."
+
+```

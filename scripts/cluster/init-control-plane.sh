@@ -5,11 +5,11 @@ set -e
 echo "Initializing Kubernetes Control Plane..."
 
 sudo kubeadm init \
-    --config manifests/kubeadm-init.yaml
+    --config /k8s-lab/manifests/kubeadm-init.yaml
 
 echo
 echo "Cluster initialized."
 echo
 echo "Run:"
 echo
-echo "scripts/common/kubeconfig.sh"
+echo "scripts/cluster/kubeconfig.sh"
