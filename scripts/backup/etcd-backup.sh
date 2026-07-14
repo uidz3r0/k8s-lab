@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BACKUP_DIR="$(pwd)/backups"
+BACKUP_DIR="/k8s-lab/backups"
 mkdir -p "${BACKUP_DIR}"
 
 SNAPSHOT="${BACKUP_DIR}/etcd-$(date +%F-%H%M).db"
