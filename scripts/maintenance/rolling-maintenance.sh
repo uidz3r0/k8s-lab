@@ -29,11 +29,9 @@ for NODE in $NODES
 do
     log_header "Starting Maintenance on $NODE"
     log_subheader "Cordon"
-
     kubectl cordon "$NODE"
 
     log_subheader "Drain"
-
     kubectl drain "$NODE" \
         --ignore-daemonsets \
         --delete-emptydir-data

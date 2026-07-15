@@ -27,11 +27,9 @@ NODE=$1
 
 log_header "Starting Maintenance on $NODE"
 log_subheader "Cordon"
-
 kubectl cordon "$NODE"
 
 log_subheader "Drain"
-
 kubectl drain "$NODE" \
   --ignore-daemonsets \
   --delete-emptydir-data
@@ -40,9 +38,7 @@ log_subheader "Under Maintenance..."
 
 sleep 5
 
-
 log_subheader "Uncordon"
-
 kubectl uncordon "$NODE"
 
 log_header "Maintenance Complete"
