@@ -1,0 +1,33 @@
+=========================================
+ Kubernetes Post-Upgrade Health Checks
+=========================================
+
+[PASS] API Server reachable
+
+[PASS] All control planes Ready
+
+[PASS] All worker nodes Ready
+
+[PASS] No NotReady nodes
+
+[PASS] All kube-system Pods Running
+
+[PASS] CoreDNS healthy
+
+[PASS] Calico healthy
+
+[PASS] kube-proxy healthy
+
+[PASS] kube-vip healthy
+
+[PASS] Certificates valid
+
+[PASS] Version consistency
+
+[PASS] Scheduling test
+
+[PASS] DNS resolution test
+
+[PASS] Cluster networking test
+
+Upgrade verification successful.
