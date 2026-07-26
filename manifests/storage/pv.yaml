@@ -11,7 +11,7 @@ metadata:
   name: demo-pv
 spec:
   capacity:
-    storage: 2Gi
+    storage: 5Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
@@ -26,7 +26,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - leia 
+          - padme 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
