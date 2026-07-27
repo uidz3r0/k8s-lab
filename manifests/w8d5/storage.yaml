@@ -27,7 +27,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - padme      # Storage directory resides on worker node leia
+                - padme      # Storage directory resides on worker node padme
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
