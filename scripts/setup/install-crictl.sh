@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-CRICTL_VERSION="v1.34.0"
+CRICTL_VERSION="v1.35.0"
 
 echo "Installing crictl ${CRICTL_VERSION}..."
 

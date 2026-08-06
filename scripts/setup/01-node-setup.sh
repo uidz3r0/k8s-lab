@@ -22,7 +22,7 @@ run_privileged() {
 }
 
 # Default Kubernetes version
-K8S_VERSION="${1:-1.34}"
+K8S_VERSION="${1:-1.35}"
 
 # Logging functions
 log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
